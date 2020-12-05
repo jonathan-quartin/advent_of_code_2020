@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <vector> //unsure how to actually create an empty list or vector that can be added to.
+#include <vector> 
 #include <string> 
 #include<numeric>
 #include <regex>
@@ -15,6 +15,8 @@ struct policy {
   string password;
 }; 
 
+///// Function for PART 1 /////
+
 int counter(string pw, char d) {
     int k = 0;
     for (int x=0; x < pw.size(); x++) {
@@ -24,6 +26,7 @@ int counter(string pw, char d) {
     }
     return k;
 }
+
 
 int main(){
     std::vector<policy> policies;
@@ -47,12 +50,28 @@ int main(){
 
     int valids = 0;
 
+    ///// PART 1 /////
+
+    /*
     for (int x=0; x < policies.size(); x++) {
         int c = counter(policies.at(x).password, policies.at(x).digit);
         if (policies.at(x).low <= c && c <= policies.at(x).high) {
             valids++;
         };
-    }
+    } 
+    */
+
+    
+    ///// PART 2 /////
+
+    for (int x=0; x < policies.size(); x++) {
+        char b = policies.at(x).digit;
+        char c = policies.at(x).password[policies.at(x).low-1];
+        char d = policies.at(x).password[policies.at(x).high-1];
+        if (b == c ^ b == d) {
+            valids++;
+        }
+    }   
     
     cout << valids;    
     
